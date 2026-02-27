@@ -126,6 +126,10 @@ id,track_id,vehicle_type,direction,number_plate,timestamp
 2,7,truck,OUT,BA 2 JA 9900,2024-11-01 10:23:18
 ```
 
+
+https://github.com/user-attachments/assets/ce535cb5-f73e-4b00-a2cd-c05fda4381b2
+
+
 ---
 
 ## 📄 License
