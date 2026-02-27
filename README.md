@@ -32,6 +32,7 @@ A real-time computer vision system that detects and tracks vehicles, reads licen
 ```
 ├── main.py               # Main detection + tracking + OCR script
 ├── yolo11l.pt            # YOLOv11 large model for vehicle detection
+├── requirements.txt      # Required libraries
 ├── best.pt               # Custom-trained YOLO model for license plates
 ├── test_video.mp4        # Input video file
 ├── vehicle_log.db        # SQLite database (auto-created on run)
@@ -52,6 +53,8 @@ cd realtime-vehicle-person-detection-ocr
 ### 2. Install dependencies
 
 ```bash
+pip install -r requirements.txt
+or 
 pip install ultralytics easyocr opencv-python pandas
 ```
 
@@ -93,6 +96,8 @@ Events are stored in `vehicle_log.db` under the `vehicle_log` table:
 You can adjust the following variables in `main.py` to suit your camera setup:
 
 ```python
+
+rtsp_url = "rtsp://<username>:<password>@<ip_address>:<port>/<stream_path>"  #RTSP of your local cctv camepra 
 y_coordinate = 500   # Y-position of the virtual trip line
 
 # IN line region (left side of frame)
