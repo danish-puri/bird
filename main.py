@@ -52,10 +52,14 @@ def log_event(track_id, vehicle_type, direction, number_plate):
     ''', (track_id, vehicle_type, direction, number_plate, timestamp))
     conn.commit()
 
-# Open the video file
-cap = cv2.VideoCapture('test_video.mp4')
+#Real time streaming from a cctv 
+rtsp_url = "rtsp://<username>:<password>@<ip_address>:<port>/<stream_path>"
+#cap = cv2.VideoCapture('rtsp_url')
 
-y_coordinate = 500  # Vehicle OUT/IN line position
+# or Open a video file
+cap = cv2.VideoCapture('test_video.mp4') 
+
+y_coordinate = 500  # Vehicle OUT/IN line position, change as required
 
 # Count tracking
 in_count = defaultdict(int)
