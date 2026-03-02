@@ -11,8 +11,12 @@ LibertyTrack 🚗🚶
 
 > A fault-tolerant, real-time computer vision system that detects and tracks vehicles and pedestrians, reads license plates via OCR, classifies directional movement (IN/OUT), and logs all events — deployed at **Liberty College, and Global College, Kathmandu, Nepal**.
 
-https://github.com/user-attach# 
+
 ---
+
+
+https://github.com/user-attachments/assets/424e83c7-0f66-4583-8f43-618ea3ced993
+
 
 ## 📄 Research Paper
 
