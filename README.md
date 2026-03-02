@@ -1,7 +1,7 @@
 
 ### Real-Time Vehicle & Pedestrian Directional Tracking System
 
-https://github.com/user-attach# LibertyTrack 🚗🚶
+LibertyTrack 🚗🚶
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)](https://www.python.org/)
 [![YOLOv11](https://img.shields.io/badge/YOLO-11n%20%2F%2011l-darkgreen?logo=ultralytics)](https://docs.ultralytics.com/models/yolo11/)
@@ -11,6 +11,7 @@ https://github.com/user-attach# LibertyTrack 🚗🚶
 
 > A fault-tolerant, real-time computer vision system that detects and tracks vehicles and pedestrians, reads license plates via OCR, classifies directional movement (IN/OUT), and logs all events — deployed at **Liberty College, and Global College, Kathmandu, Nepal**.
 
+https://github.com/user-attach# 
 ---
 
 ## 📄 Research Paper
