@@ -26,11 +26,13 @@ This repository accompanies the academic paper:
 > Danish Puri — New York University, Tandon School of Engineering  
 > *Prepared for IEEE-style submission*
 
-The paper documents the full system design, methodology, and real-world evaluation results including:
+The paper documents the full system design, methodology, and real-world deployment observations including:
 - 20.8 FPS sustained throughput on Apple M2 (no CUDA required)
-- 92–95% IN/OUT directional classification accuracy
+- High observed directional classification rate during operational deployment (qualitative observation, not a rigorously validated metric)
 - 18-hour uninterrupted runtime with zero data loss
 - Failure case analysis: low-light, motion blur, motorcycle clustering
+
+> **Note:** This paper is a case study reporting observed system behaviour during deployment. Directional accuracy figures reflect operational observations rather than results validated against an annotated ground-truth dataset.
 
 📥 **[Download the paper (PDF)](./final_publication_ready_paper.pdf)** · 📋 **[arXiv preprint](#)** *(link to be added upon upload)*
 
@@ -182,8 +184,10 @@ Results from the Liberty College and Global College deployment (approx. 14 hours
 | Mean throughput | 20.8 FPS |
 | Max uninterrupted runtime | 18 hours |
 | Data loss events | 0 |
-| IN/OUT directional accuracy | 92–95% |
+| IN/OUT directional accuracy (observed) | High — qualitative operational observation |
 | Hardware | Apple M2 (no CUDA) |
+
+> ⚠️ **Accuracy note:** The directional classification rate is reported as an observed operational behaviour during deployment, not a metric validated against a manually annotated ground-truth dataset. This system is a case study; claims about accuracy should be interpreted accordingly.
 
 See the [research paper](#-research-paper) for the full methodology and analysis.
 
