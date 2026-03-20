@@ -1,5 +1,5 @@
 
-### LibertyTrack: A Deployment Case Study for Real-Time Vehicle and Pedestrian Tracking in a Resource-Constrained Campus Environment
+### LibertyTrack: Real-Time Vehicle and Pedestrian Tracking system 
 
 🚗🚶 *Engineering Documentation & Deployment Report*
 
@@ -9,7 +9,7 @@
 [![arXiv](https://img.shields.io/badge/Paper-arXiv-red)](https://arxiv.org/)
 [![Deployment](https://img.shields.io/badge/Deployed%20at-Liberty%20College%2C%20Nepal-orange)]()
 
-> This repository documents a real-world deployment of a computer vision–based campus traffic monitoring system at two institutions in Kathmandu, Nepal. It is offered as an engineering case study — not a benchmark or algorithmic contribution — to support reproducibility and technology transfer to similar resource-constrained institutions.
+> This repository documents a real-world deployment of a computer vision–based campus traffic monitoring system at two institutions in Kathmandu, Nepal. It is offered as an engineering case study to support reproducibility and technology transfer to similar resource-constrained institutions.
 
 
 ---
@@ -43,8 +43,7 @@ The paper documents the full deployment process, pragmatic design choices, real-
 ## 📋 Abstract
 
 This case study documents the deployment of a real-time vehicle and pedestrian directional tracking system at Liberty College and Global College, Kathmandu, Nepal — two institutions operating under infrastructure constraints typical of developing-country campuses: low-resolution CCTV cameras, intermittent Wi-Fi, heterogeneous traffic, and no on-site GPU hardware.
-
-Rather than proposing novel computer vision algorithms, this work documents the practical challenges encountered, the design choices made to address them, and the lessons learned from sustained real-world operation. We describe how off-the-shelf tools (YOLO11, EasyOCR, OpenCV, SQLite) were assembled into a fault-tolerant pipeline that appears to operate reliably under these conditions. The system logged traffic flow events over approximately 18 hours across two campus sites. We observed consistent directional classification behaviour, though we did not validate these observations against an annotated ground-truth dataset.
+This work documents the practical challenges encountered, the design choices made to address them, and the lessons learned from sustained real-world operation. We describe how off-the-shelf tools (YOLO11, EasyOCR, OpenCV, SQLite) were assembled into a fault-tolerant pipeline that appears to operate reliably under these conditions. The system logged traffic flow events over approximately 18 hours across two campus sites. We observed consistent directional classification behaviour, though we did not validate these observations against an annotated ground-truth dataset.
 
 The primary contribution of this work is a reproducible deployment blueprint and an honest account of what worked, what failed, and what should be considered by similar institutions attempting to implement comparable systems.
 
