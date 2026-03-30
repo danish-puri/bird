@@ -41,7 +41,7 @@ The paper documents the full deployment process, pragmatic design choices, real-
 
 ## 📋 Abstract
 
-This case study documents the deployment of a real-time vehicle and pedestrian directional tracking system at Liberty College and Global College, Kathmandu, Nepal — two institutions operating under infrastructure constraints typical of developing-country campuses: low-resolution CCTV cameras, intermittent Wi-Fi, heterogeneous traffic, and no on-site GPU hardware.
+This case study documents the deployment of a real-time vehicle and pedestrian directional tracking system at Liberty College and Global College, Kathmandu, Nepal — two institutions operating in Nepal, and had low-resolution CCTV cameras, intermittent Wi-Fi, heterogeneous traffic, and no on-site GPU hardware.
 This work documents the practical challenges encountered, the design choices made to address them, and the lessons learned from sustained real-world operation. We describe how off-the-shelf tools (YOLO11, EasyOCR, OpenCV, SQLite) were assembled into a fault-tolerant pipeline that appears to operate reliably under these conditions. The system logged traffic flow events over approximately 18 hours across two campus sites. We observed consistent directional classification behaviour, though we did not validate these observations against an annotated ground-truth dataset.
 
 The primary contribution of this work is a reproducible deployment blueprint and an honest account of what worked, what failed, and what should be considered by similar institutions attempting to implement comparable systems.
@@ -86,7 +86,7 @@ This section describes the design choices we made for this specific deployment c
 
 LibertyTrack was implemented and operated at **Liberty College and Global College, Kathmandu, Nepal**. The physical environment is characterised by:
 
-- Low-resolution Hikvision CCTV cameras (consumer-grade, fixed-mount) over RTSP/TCP
+- Hikvision CCTV cameras (consumer-grade, fixed-mount) over RTSP/TCP
 - Congested campus Wi-Fi with frequent intermittent dropouts
 - Mixed traffic: pedestrians, cars, and dense motorcycle clusters
 - No on-site GPU hardware — a consumer laptop (Apple M2) served as the inference machine
@@ -99,7 +99,7 @@ These constraints shaped every design decision described below.
 |---|---|---|
 | 🔍 **Object Detection** | YOLO11 (n/l variants) | Pre-trained on COCO; runs at acceptable speed on Apple M2 MPS without CUDA |
 | 🪪 **License Plate Detection** | Custom-trained YOLO model (`best.pt`) | Off-the-shelf models were not trained on Nepali plates |
-| 🔤 **OCR** | EasyOCR with English support | Handles mixed Latin/Devanagari script; runs on CPU without GPU dependency |
+| 🔤 **OCR** | EasyOCR with English, and Nepali support | Handles mixed Latin/Devanagari script; runs on CPU without GPU dependency |
 | ↕️ **Directional Classification** | Virtual trip lines (Y-coordinate threshold) | Simple, robust, and interpretable; no learned components that could degrade unexpectedly |
 | 🗄️ **Logging** | SQLite + CSV export | Requires no database server; crash-safe; easy to inspect without specialist tools |
 | ⚡ **Fault Tolerance** | RTSP reconnection with exponential back-off | Campus Wi-Fi drops were frequent; silent failure would invalidate the log |
