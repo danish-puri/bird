@@ -34,9 +34,8 @@ The paper documents the full deployment process, pragmatic design choices, real-
 - 18-hour uninterrupted runtime with zero data loss
 - Documented failure modes: low-light conditions, motion blur, motorcycle clustering
 
-> **Note:** This work is a deployment case study reporting observed system behaviour. Directional figures reflect operational observations, not results validated against a manually annotated ground-truth dataset. This work's contribution is infrastructural and documentary, not algorithmic.
 
-📥 **[Download the paper (PDF)](./final_publication_ready_paper.pdf)** · 📋 **[arXiv preprint](#)** *(link to be added upon upload)*
+📥 **[Download the paper (PDF)](https://osf.io/6s7aw/files/9kch3)** ·
 
 ---
 
