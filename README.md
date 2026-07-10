@@ -1,6 +1,4 @@
-<h1 aligh="center"> 
-    Bird
-</h1>
+<h1 aligh="center"> Bird </h1>
 
 🚗🚶 *Engineering Documentation & Deployment Report*
 
