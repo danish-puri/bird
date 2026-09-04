@@ -80,15 +80,21 @@ Every design decision below came from these constraints.
 | ⚡ **Fault tolerance** | RTSP reconnection with exponential backoff | Campus Wi-Fi dropped often, and a silent failure would ruin the log |
 | 🍎 **Hardware** | Apple M2 through PyTorch MPS | The only hardware available, and no CUDA was needed |
 
-### 3.2 Tech Stack
+### 3.2 Current Technical Stack
 
-| Tool | Purpose |
-|---|---|
-| [Ultralytics YOLO11](https://docs.ultralytics.com/models/yolo11/) | Vehicle, pedestrian, and license plate detection plus tracking |
-| [EasyOCR](https://github.com/JaidedAI/EasyOCR) | License plate text recognition |
-| [OpenCV](https://opencv.org/) | Video input, RTSP stream handling, and frame rendering |
-| [SQLite3](https://www.sqlite.org/) | Local event logging |
-| [Pandas](https://pandas.pydata.org/) | CSV export of the vehicle log |
+The table below describes the implementation in `main.py` and the direct dependencies declared in `requirements.txt`. Dependency versions are not pinned, so the entries identify the technologies and interfaces used rather than an exact reproducible software environment.
+
+| System layer | Technology | Role in the current implementation | Repository evidence |
+|---|---|---|---|
+| Runtime | [Python 3.10](https://www.python.org/) | Runs the single-process detection, tracking, OCR, and logging pipeline | Documented project target; no version-enforcement file is included |
+| Object detection and tracking | [Ultralytics YOLO11](https://docs.ultralytics.com/models/yolo11/) with `yolo11l.pt` | Detects supported COCO object classes and maintains track identities across frames with persistent tracking | `YOLO('yolo11l.pt')` and `vehicle_model.track(..., persist=True)` in [`main.py`](main.py) |
+| License-plate detection | Ultralytics YOLO with custom `best.pt` weights | Detects license-plate regions inside each tracked-object crop | `YOLO('best.pt')` in [`main.py`](main.py); weights included as [`best.pt`](best.pt) |
+| Optical character recognition | [EasyOCR](https://github.com/JaidedAI/EasyOCR) | Reads text from detected plate crops; the current code initializes the English model only | `easyocr.Reader(['en'])` in [`main.py`](main.py) |
+| Video I/O and visualization | [OpenCV](https://opencv.org/) (`opencv-python`) | Reads the active video-file input, provides RTSP-capable capture, draws trip lines and annotations, and displays processed frames | `cv2.VideoCapture`, drawing, and display calls in [`main.py`](main.py) |
+| Event persistence | [SQLite](https://www.sqlite.org/) through Python's `sqlite3` module | Stores each directional crossing event and commits it immediately | `vehicle_log.db` and the `vehicle_log` table defined in [`main.py`](main.py) |
+| Tabular export | [pandas](https://pandas.pydata.org/) | Reads the SQLite event table and exports `vehicle_log.csv` when processing ends | `read_sql_query` and `to_csv` in [`main.py`](main.py) |
+
+The four direct third-party packages are `opencv-python`, `pandas`, `ultralytics`, and `easyocr`; see [`requirements.txt`](requirements.txt). PyTorch is used transitively by the model libraries, while the current script does not explicitly select a CPU, CUDA, or MPS device.
 
 ### 3.3 Project Structure
 
