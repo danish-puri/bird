@@ -12,8 +12,6 @@
 
 Bird combines object tracking, license-plate recognition, and directional crossing logs. I built it around the conditions encountered at two campuses in Kathmandu: mixed traffic, inconsistent lighting, constrained hardware, and unreliable networks. Its longer-term goal is autonomous traffic management for Nepal.
 
-**Current status:** this checkout contains a single-script monitoring prototype. The [source audit and implementation plan](docs/AUDIT.md) documents its reliability gaps and proposed fixes. Application changes, automated tests, and runtime validation in that plan remain pending. Historical deployment observations appear separately below.
-
 https://github.com/user-attachments/assets/a2079247-0f05-41ec-9d38-801f72050072
 
 ## Current implementation
@@ -37,7 +35,6 @@ bird/
 ├── main.py               # Detection, tracking, OCR, display, and logging
 ├── best.pt               # Included custom plate-detection weights
 ├── requirements.txt      # Unpinned direct Python dependencies
-├── docs/AUDIT.md         # Source findings and proposed implementation plan
 ├── LICENSE               # MIT license
 ├── yolo11l.pt            # Base detector weights; obtain separately
 ├── test_video.mp4        # Your input video; not included
@@ -139,19 +136,6 @@ id,track_id,vehicle_type,direction,number_plate,timestamp
 3,12,person,IN,,2024-11-01 10:24:05
 ```
 
-## Known gaps and implementation plan
-
-The [audit](docs/AUDIT.md) supplies evidence and acceptance criteria for ten findings. Application implementation and runtime validation remain pending:
-
-1. Add an import-safe entry point, validated configuration, and offline tests. Importing the current `main.py` initializes models, opens outputs/capture, and starts processing.
-2. Handle missing tracker IDs, failed startup, bounded stream reconnection, and exception-safe resource cleanup/export.
-3. Preserve clean inference images and useful plate reads, validate crops, and bound repeated OCR work. Plate inference currently also runs for tracked people.
-4. Unify drawing/counting geometry, define track-state lifetimes, and add compatible event context. State currently grows without eviction.
-5. Improve operator status, frame-aware overlays, and headless/text alternatives. The present window uses fixed positions and has only the `q` control.
-6. Validate the changes with offline checks, visual inspection, and a controlled clip comparison when suitable footage is available.
-
-No test suite or benchmark for this checkout is supplied. The historical figures below are not a performance or accuracy baseline for those changes.
-
 ## Kathmandu deployment case study
 
 Bird was previously called **LibertyTrack**, the name used in the accompanying paper:
@@ -162,7 +146,7 @@ Bird was previously called **LibertyTrack**, the name used in the accompanying p
 
 **[Read the case study (PDF)](https://osf.io/6s7aw/files/9kch3)**
 
-The following preserves the author's historical deployment account. These observations were not reproduced during the source audit and do not establish the behavior of the checked-in script.
+The following describes the author's historical deployment observations. Results may differ with the software version, hardware, and camera setup.
 
 | Condition | Liberty College | Global College |
 | --- | --- | --- |
@@ -201,7 +185,7 @@ The contribution is the integration and documentation of existing detection, tra
 
 ## Vision and longer-term roadmap
 
-Nepali roads combine dense motorcycle traffic, mixed Latin and Devanagari plates, unusual vehicle classes, dust, rain, and power/network interruptions. Bird aims to support affordable monitoring and eventually traffic management suited to those conditions. Beyond the immediate audit work, planned directions include:
+Nepali roads combine dense motorcycle traffic, mixed Latin and Devanagari plates, unusual vehicle classes, dust, rain, and power/network interruptions. Bird aims to support affordable monitoring and eventually traffic management suited to those conditions. Planned directions include:
 
 - [ ] Nepali plate recognition and a publishable plate-training dataset
 - [ ] Vehicle-class adaptation for e-rickshaws and tempos
@@ -210,7 +194,7 @@ Nepali roads combine dense motorcycle traffic, mixed Latin and Devanagari plates
 - [ ] Annotated direction-validation footage and a structured field-log template
 - [ ] Traffic-flow control experiments at gates and intersections
 
-These capabilities are aspirations, not features of the current script. The audit covers the existing Python/OpenCV application; it excludes the separate `neoBird` repository and webapp work.
+These capabilities are aspirations, not features of the current script.
 
 ## Operations and privacy
 
