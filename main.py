@@ -10,7 +10,7 @@ import easyocr
 vehicle_model = YOLO('yolo11l.pt')  # for detecting vehicles
 #best.pt is the custom trained model for license plates
 plate_model = YOLO('best.pt')      # for detecting license plates
-reader = easyocr.Reader(['en'])  # English + Nepali (Devanagari). #Newari, Hindi also available but not used.
+reader = easyocr.Reader(['en'])  # English only. Devanagari plates need a better camera, not a new model
 
 # OCR function for cropped plate images
 def perform_ocr_on_image(img, coordinates):
@@ -75,7 +75,8 @@ while cap.isOpened():
 
     results = vehicle_model.track(frame, persist=True, classes=[0,1,2,3,5,6,7])
 
-    if results[0].boxes.data is not None:
+    # boxes.id is None on frames where nothing is being tracked yet
+    if results[0].boxes.id is not None:
         boxes = results[0].boxes.xyxy.cpu()
         track_ids = results[0].boxes.id.int().cpu().tolist()
         class_indices = results[0].boxes.cls.int().cpu().tolist()
@@ -90,11 +91,11 @@ while cap.isOpened():
             cy = (y1 + y2) // 2
             class_name = class_list[class_idx]
 
-            vehicle_crop = frame[y1:y2, x1:x2]
+            vehicle_crop = frame[max(0, y1):y2, max(0, x1):x2]
             plate_text = ""
 
             # Detect license plate in the cropped vehicle image
-            plate_results = plate_model(vehicle_crop)
+            plate_results = plate_model(vehicle_crop, verbose=False) if vehicle_crop.size else None
 
             if plate_results and plate_results[0].boxes.data is not None:
                 plate_boxes = plate_results[0].boxes.xyxy.cpu()
@@ -105,7 +106,7 @@ while cap.isOpened():
                         plate_text = perform_ocr_on_image(vehicle_crop, (px1, py1, px2, py2))
                         if plate_text:
                             break  # Use first detected plate
-                    except:
+                    except Exception:
                         continue
 
             cv2.circle(frame, (cx, cy), 4, (0, 0, 255), -1)

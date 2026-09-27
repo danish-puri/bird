@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Bird runtime files
+vehicle_log.db
+vehicle_log.csv
+yolo11l.pt
+*.mp4
